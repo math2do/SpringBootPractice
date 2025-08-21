@@ -18,14 +18,17 @@ public class RedisService {
   public <T> T get(String key, Class<T> entityClass) {
     var redis = redisTemplate.opsForValue();
     Object o = redis.get(key);
+    if (o == null) {
+      return null;
+    }
     ObjectMapper mapper = new ObjectMapper();
 
     try {
       return mapper.readValue(o.toString(), entityClass);
     } catch (JsonProcessingException e) {
       log.error("Exception:", e);
+      return null;
     }
-    return null;
   }
 
   public void set(String key, Object val, Long ttl) {
