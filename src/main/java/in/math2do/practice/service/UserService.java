@@ -1,17 +1,16 @@
 package in.math2do.practice.service;
 
+import java.util.List;
+import java.util.Optional;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import in.math2do.practice.constants.Constant;
 import in.math2do.practice.entity.UserEntity;
 import in.math2do.practice.enums.Role;
 import in.math2do.practice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -31,7 +30,8 @@ public class UserService {
 
   public UserEntity updateUser(UserEntity user, UserEntity userReq) {
     // TODO: conditionally set the fields for which updated values are sent
-    // Here we assume that new password, new username, are sent as part of update request
+    // Here we assume that new password, new username, are sent as part of update
+    // request
     user.setUsername(user.getUsername());
     user.setPassword(this.encoder.encode(userReq.getPassword()));
     return this.repository.save(user);
