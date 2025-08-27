@@ -1,11 +1,10 @@
 package in.math2do.practice.service;
 
-import in.math2do.practice.entity.EmployeeEntity;
-import in.math2do.practice.repository.EmployeeRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import in.math2do.practice.entity.EmployeeEntity;
+import in.math2do.practice.repository.EmployeeRepository;
 
 @Service
 public class EmployeeService {
@@ -29,15 +28,13 @@ public class EmployeeService {
   }
 
   public EmployeeEntity updateEmployee(Long id, EmployeeEntity employee) {
-    return repository.findById(id)
-            .map(e -> {
-              e.setName(employee.getName());
-              e.setRole(employee.getRole());
-              e.setRole(employee.getEmail());
-              e.setSalary(employee.getSalary());
-              return repository.save(e);
-            })
-            .orElse(null);
+    return repository.findById(id).map(e -> {
+      e.setName(employee.getName());
+      e.setRole(employee.getRole());
+      e.setRole(employee.getEmail());
+      e.setSalary(employee.getSalary());
+      return repository.save(e);
+    }).orElse(null);
   }
 
   public void deleteEmployee(Long id) {

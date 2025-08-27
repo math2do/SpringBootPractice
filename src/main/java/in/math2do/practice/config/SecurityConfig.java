@@ -1,8 +1,7 @@
 package in.math2do.practice.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -19,17 +18,21 @@ import in.math2do.practice.enums.Role;
 public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests(auth -> auth.requestMatchers("/health", "/public/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/user/**").permitAll() // sign up mustn't require
-                                                                      // auth
-            .requestMatchers("/user/**")
-            .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
-            .requestMatchers("/journal/**")
-            .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
+    http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth
 
-            .anyRequest().authenticated())
-        .httpBasic(withDefaults());
+        // public endpoints
+        .requestMatchers("/health", "/public/**").permitAll()
+
+        // sign up mustn't require auth
+        .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
+
+        .requestMatchers("/users/**").hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
+
+        .requestMatchers("/journals/**")
+        .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
+
+        // rest endpoints are permitted
+        .anyRequest().permitAll()).httpBasic(withDefaults());
 
     return http.build();
   }

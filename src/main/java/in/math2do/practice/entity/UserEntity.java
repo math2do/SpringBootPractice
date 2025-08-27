@@ -1,18 +1,13 @@
 package in.math2do.practice.entity;
 
-import java.util.List;
+import java.util.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 @Document(collection = "users")
 @Data
@@ -33,5 +28,6 @@ public class UserEntity {
   private List<String> roles;
 
   @DBRef(lazy = true) // avoid loading the User document unless needed.
-  private List<JournalEntry> journals;
+  @Builder.Default
+  private List<JournalEntry> journals = new ArrayList<>();
 }

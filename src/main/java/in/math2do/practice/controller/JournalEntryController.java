@@ -2,27 +2,17 @@ package in.math2do.practice.controller;
 
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import in.math2do.practice.entity.JournalEntry;
-import in.math2do.practice.entity.UserEntity;
-import in.math2do.practice.service.JournalEntryService;
-import in.math2do.practice.service.UserService;
+import org.springframework.web.bind.annotation.*;
+import in.math2do.practice.entity.*;
+import in.math2do.practice.service.*;
 
 @RestController
-@RequestMapping("/journal")
+@RequestMapping("/journals")
 public class JournalEntryController {
 
   @Autowired

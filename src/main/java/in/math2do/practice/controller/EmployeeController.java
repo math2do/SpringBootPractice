@@ -1,14 +1,13 @@
 package in.math2do.practice.controller;
 
-import in.math2do.practice.entity.EmployeeEntity;
-import in.math2do.practice.service.EmployeeService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import in.math2do.practice.entity.EmployeeEntity;
+import in.math2do.practice.service.EmployeeService;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
   private final EmployeeService service;
 
@@ -33,7 +32,8 @@ public class EmployeeController {
   }
 
   @PutMapping("/{id}")
-  public EmployeeEntity updateEmployee(@PathVariable Long id, @RequestBody EmployeeEntity employee) {
+  public EmployeeEntity updateEmployee(@PathVariable Long id,
+      @RequestBody EmployeeEntity employee) {
     return service.updateEmployee(id, employee);
   }
 
