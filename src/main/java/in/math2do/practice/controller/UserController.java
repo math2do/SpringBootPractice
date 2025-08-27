@@ -1,8 +1,8 @@
 package in.math2do.practice.controller;
 
-import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,17 @@ public class UserController {
   private UserService service;
 
   @GetMapping
-  public List<UserEntity> getAllUsers() {
-    return service.getAllUsers();
+  public Page<UserEntity> getAllUsers(@RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "username") String sortBy,
+      @RequestParam(defaultValue = "asc") String direction) {
+
+
+    Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending()
+        : Sort.by(sortBy).ascending();
+
+    Pageable pageable = PageRequest.of(page, size, sort);
+    return service.getAllUsers(pageable);
   }
 
   @GetMapping("/{id}")

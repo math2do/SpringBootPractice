@@ -3,6 +3,7 @@ package in.math2do.practice.service;
 import java.util.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import in.math2do.practice.constants.Constant;
@@ -38,8 +39,8 @@ public class UserService {
     return repository.save(user);
   }
 
-  public List<UserEntity> getAllUsers() {
-    List<UserEntity> users = repository.findAll();
+  public Page<UserEntity> getAllUsers(Pageable pageable) {
+    Page<UserEntity> users = repository.findAll(pageable);
     redis.set(Constant.ALL_USERS_KEY, users, Constant.ALL_USERS_EXP);
     return users;
   }
