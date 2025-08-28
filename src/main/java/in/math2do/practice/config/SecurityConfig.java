@@ -26,13 +26,15 @@ public class SecurityConfig {
         // sign up mustn't require auth
         .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
 
+        // Role based auth
         .requestMatchers("/users/**").hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
 
+        // Role based auth
         .requestMatchers("/journals/**")
         .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
 
-        // rest endpoints are permitted
-        .anyRequest().permitAll()).httpBasic(withDefaults());
+        // rest endpoints needs authentication by default
+        .anyRequest().authenticated()).httpBasic(withDefaults());
 
     return http.build();
   }
