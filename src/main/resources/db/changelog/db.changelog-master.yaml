@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/create/001-create-test-table.yaml
+  - include:
+      file: db/changelog/create/002-create-user-table.yaml
+  - include:
+      file: db/changelog/create/003-create-employee-table.yaml
+  - include:
+      file: db/changelog/create/004-create-person-table.yaml
+  - include:
+      file: db/changelog/create/005-create-address-table.yaml
+  - include:
+      file: db/changelog/create/006-create-author-table.yaml
+  - include:
+      file: db/changelog/create/007-create-book-table.yaml
+  - include:
+      file: db/changelog/create/008-create-review-table.yaml
+  - include:
+      file: db/changelog/alter/001-add-foreign-keys.yaml
+  - include:
+      file: db/changelog/insert/001-insert-initial-data.yaml

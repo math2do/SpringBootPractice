@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-person
+      author: math2do
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                    primaryKey: true
+                    nullable: false
+            - column:
+                name: first_name
+                type: VARCHAR(100)
+                constraints:
+                    nullable: false
+            - column:
+                name: last_name
+                type: VARCHAR(100)
+                constraints:
+                    nullable: false
+            - column:
+                name: email
+                type: VARCHAR(150)
+                constraints:
+                    nullable: false
+                    unique: true
+            - column:
+                name: date_of_birth
+                type: DATE
+                constraints:
+                    nullable: true

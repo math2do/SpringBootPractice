@@ -1,19 +1,16 @@
 package in.math2do.practice.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import in.math2do.practice.entity.EmployeeEntity;
 import in.math2do.practice.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
   private final EmployeeRepository repository;
-
-  @Autowired
-  public EmployeeService(EmployeeRepository repository) {
-    this.repository = repository;
-  }
 
   public List<EmployeeEntity> getAllEmployees() {
     return repository.findAll();

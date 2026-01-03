@@ -2,39 +2,41 @@ package in.math2do.practice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(
-  name = "employees",
-  uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"email"})
-  }
+    name = "employees",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"})
+    }
 )
 public class EmployeeEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
-  private Long id;
-  private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false, nullable = false)
+    private Long id;
+    private String name;
 
-  @CreationTimestamp
-  @Column(updatable = false)
-  private LocalDateTime createdAt;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
-  @UpdateTimestamp
-  private LocalDateTime updatedAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-  @Column(unique = true, nullable = false)
-  private String email;
-  private String role;
-  private int salary;
+    @Column(unique = true, nullable = false)
+    private String email;
+    private String role;
+    private int salary;
 }

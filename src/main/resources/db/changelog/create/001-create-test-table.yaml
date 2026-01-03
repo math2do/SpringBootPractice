@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-test-table
+      author: math2do
+      changes:
+        - createTable:
+            tableName: test_table
+            columns:
+              - column:
+                  name: test_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: test_column
+                  type: INT

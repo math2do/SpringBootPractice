@@ -1,0 +1,284 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-insert-initial-data
+      author: math2do
+      changes:
+        # insert into author table
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: first_name
+                  value: "John"
+              - column:
+                  name: last_name
+                  value: "Doe"
+              - column:
+                  name: biography
+                  value: "John Doe is a prolific author known for his engaging storytelling and vivid characters."
+              - column:
+                  name: date_of_birth
+                  valueDate: "1980-05-15"
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: first_name
+                  value: "Jane"
+              - column:
+                  name: last_name
+                  value: "Smith"
+              - column:
+                  name: biography
+                  value: "Jane Smith has captivated readers worldwide with her thrilling novels and intricate plots."
+              - column:
+                  name: date_of_birth
+                  valueDate: "1975-09-30"
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: first_name
+                  value: "Emily"
+              - column:
+                  name: last_name
+                  value: "Johnson"
+              - column:
+                  name: biography
+                  value: "Emily Johnson is celebrated for her poetic prose and deep exploration of human emotions."
+              - column:
+                  name: date_of_birth
+                  valueDate: "1990-12-10"
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: first_name
+                  value: "Michael"
+              - column:
+                  name: last_name
+                  value: "Brown"
+              - column:
+                  name: biography
+                  value: "Michael Brown's works often delve into the complexities of modern life, blending humor and insight."
+              - column:
+                  name: date_of_birth
+                  valueDate: "1985-03-22"
+        # insert some books
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: "The Great Adventure"
+              - column:
+                  name: isbn
+                  value: "978-3-16-148410-0"
+              - column:
+                  name: published_date
+                  valueDate: "2010-06-15"
+              - column:
+                  name: author_id
+                  valueNumeric: 1
+              - column:
+                  name: price
+                  valueNumeric: 19.99
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: "Mystery of the Lost City"
+              - column:
+                  name: isbn
+                  value: "978-1-23-456789-0"
+              - column:
+                  name: published_date
+                  valueDate: "2015-09-10"
+              - column:
+                  name: author_id
+                  valueNumeric: 2
+              - column:
+                  name: price
+                  valueNumeric: 10.99
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: "Journey to the Unknown"
+              - column:
+                  name: isbn
+                  value: "978-0-12-345678-9"
+              - column:
+                  name: published_date
+                  valueDate: "2018-11-05"
+              - column:
+                  name: author_id
+                  valueNumeric: 3
+              - column:
+                  name: price
+                  valueNumeric: 20.90
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: "Tales of the Future"
+              - column:
+                  name: isbn
+                  value: "978-9-87-654321-0"
+              - column:
+                  name: published_date
+                  valueDate: "2020-01-20"
+              - column:
+                  name: author_id
+                  valueNumeric: 4
+              - column:
+                  name: price
+                  valueNumeric: 25.19
+        # insert 2 reviews for each book
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 1
+              - column:
+                  name: rating
+                  valueNumeric: 5
+              - column:
+                  name: review_text
+                  value: "An exhilarating read from start to finish!"
+              - column:
+                  name: reviewer_name
+                  value: "Alice"
+              - column:
+                  name: review_date
+                  valueDate: "2021-07-12"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 1
+              - column:
+                  name: rating
+                  valueNumeric: 4
+              - column:
+                  name: review_text
+                  value: "Great adventure, but the ending was a bit predictable."
+              - column:
+                  name: reviewer_name
+                  value: "Bob"
+              - column:
+                  name: review_date
+                  valueDate: "2021-07-15"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 2
+              - column:
+                  name: rating
+                  valueNumeric: 4
+              - column:
+                  name: review_text
+                  value: "A thrilling mystery that kept me guessing!"
+              - column:
+                  name: reviewer_name
+                  value: "Charlie"
+              - column:
+                  name: review_date
+                  valueDate: "2022-03-22"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 2
+              - column:
+                  name: rating
+                  valueNumeric: 3
+              - column:
+                  name: review_text
+                  value: "Good plot, but some characters felt underdeveloped."
+              - column:
+                  name: reviewer_name
+                  value: "Diana"
+              - column:
+                  name: review_date
+                  valueDate: "2022-03-25"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 3
+              - column:
+                  name: rating
+                  valueNumeric: 5
+              - column:
+                  name: review_text
+                  value: "A fascinating journey into the unknown!"
+              - column:
+                  name: reviewer_name
+                  value: "Ethan"
+              - column:
+                  name: review_date
+                  valueDate: "2023-05-10"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 3
+              - column:
+                  name: rating
+                  valueNumeric: 4
+              - column:
+                  name: review_text
+                  value: "Well-written and engaging, though a bit slow in parts."
+              - column:
+                  name: reviewer_name
+                  value: "Fiona"
+              - column:
+                  name: review_date
+                  valueDate: "2023-05-12"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 4
+              - column:
+                  name: rating
+                  valueNumeric: 5
+              - column:
+                  name: review_text
+                  value: "A visionary look at the future, truly inspiring!"
+              - column:
+                  name: reviewer_name
+                  value: "George"
+              - column:
+                  name: review_date
+                  valueDate: "2024-01-18"
+        - insert:
+            tableName: review
+            columns:
+              - column:
+                  name: book_id
+                  valueNumeric: 4
+              - column:
+                  name: rating
+                  valueNumeric: 4
+              - column:
+                  name: review_text
+                  value: "Thought-provoking and imaginative, a great read."
+              - column:
+                  name: reviewer_name
+                  value: "Hannah"
+              - column:
+                  name: review_date
+                  valueDate: "2024-01-20"

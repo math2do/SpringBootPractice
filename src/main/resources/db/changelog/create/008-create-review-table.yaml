@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-create-review
+      author: math2do
+      changes:
+        - createTable:
+            tableName: review
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reviewer_name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rating
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: review_text
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: review_date
+                  type: DATE
+                  constraints:
+                    nullable: false

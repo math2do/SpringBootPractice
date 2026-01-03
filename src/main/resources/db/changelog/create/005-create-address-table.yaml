@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-address
+      author: math2do
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: address_line1
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address_line2
+                  type: VARCHAR(255)
+                  constraints:
+                      nullable: true
+              - column:
+                  name: city
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: state
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: zip_code
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false

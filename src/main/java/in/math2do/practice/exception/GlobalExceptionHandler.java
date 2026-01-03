@@ -1,5 +1,6 @@
 package in.math2do.practice.exception;
 
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,7 +17,7 @@ public class GlobalExceptionHandler {
       HttpServletRequest request) {
 
     String errorMessage = ex.getBindingResult().getAllErrors().stream().findFirst()
-        .map(err -> err.getDefaultMessage()).orElse("Validation failed");
+        .map(DefaultMessageSourceResolvable::getDefaultMessage).orElse("Validation failed");
 
     ErrorResponse error =
         new ErrorResponse(HttpStatus.BAD_REQUEST.value(), request.getRequestURI(), errorMessage);
