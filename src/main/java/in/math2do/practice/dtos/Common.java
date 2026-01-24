@@ -3,6 +3,7 @@ package in.math2do.practice.dtos;
 import lombok.*;
 
 public class Common {
+  private Common() {}
 
   @Getter
   @AllArgsConstructor
