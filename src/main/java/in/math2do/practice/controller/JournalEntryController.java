@@ -1,5 +1,7 @@
 package in.math2do.practice.controller;
 
+import in.math2do.practice.entity.*;
+import in.math2do.practice.service.*;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -8,23 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import in.math2do.practice.entity.*;
-import in.math2do.practice.service.*;
 
 @RestController
 @RequestMapping("/journals")
 public class JournalEntryController {
 
-  @Autowired
-  private JournalEntryService journalEntryService;
+  @Autowired private JournalEntryService journalEntryService;
 
-  @Autowired
-  private UserService userService;
+  @Autowired private UserService userService;
 
   @GetMapping("/all/{username}")
   public ResponseEntity<List<JournalEntry>> getEntries(@PathVariable String username) {
-    UserEntity user = userService.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    UserEntity user =
+        userService
+            .findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     List<JournalEntry> entries = user.getJournals();
     return ResponseEntity.ok().body(entries);
   }
@@ -32,13 +32,14 @@ public class JournalEntryController {
   @GetMapping("/{id}")
   public ResponseEntity<JournalEntry> getEntryById(@PathVariable ObjectId id) {
     Optional<JournalEntry> journal = this.journalEntryService.getEntryById(id);
-    return journal.map(journalEntry -> ResponseEntity.ok().body(journalEntry))
+    return journal
+        .map(journalEntry -> ResponseEntity.ok().body(journalEntry))
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @PostMapping("/{username}")
-  public ResponseEntity<JournalEntry> setEntry(@RequestBody JournalEntry journalEntry,
-      @PathVariable String username) {
+  public ResponseEntity<JournalEntry> setEntry(
+      @RequestBody JournalEntry journalEntry, @PathVariable String username) {
     try {
       this.journalEntryService.saveJournalEntry(journalEntry, username);
       URI location = URI.create("/journal/" + journalEntry.getId().toString());
@@ -55,16 +56,19 @@ public class JournalEntryController {
   }
 
   @PutMapping("/{username}/{id}")
-  public ResponseEntity<JournalEntry> updateEntry(@PathVariable String username,
-      @PathVariable ObjectId id, @RequestBody JournalEntry journalEntryReq) {
+  public ResponseEntity<JournalEntry> updateEntry(
+      @PathVariable String username,
+      @PathVariable ObjectId id,
+      @RequestBody JournalEntry journalEntryReq) {
     JournalEntry oldEntry = journalEntryService.getEntryById(id).orElse(null);
 
     // Update the old entry with passed new values and save in db
     if (oldEntry != null) {
 
-      oldEntry.setTitle(journalEntryReq.getTitle() != null && !journalEntryReq.getTitle().isEmpty()
-          ? journalEntryReq.getTitle()
-          : oldEntry.getTitle());
+      oldEntry.setTitle(
+          journalEntryReq.getTitle() != null && !journalEntryReq.getTitle().isEmpty()
+              ? journalEntryReq.getTitle()
+              : oldEntry.getTitle());
 
       oldEntry.setContent(
           journalEntryReq.getContent() != null && !journalEntryReq.getContent().isEmpty()

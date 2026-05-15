@@ -1,6 +1,8 @@
 package in.math2do.practice.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
+
+import in.math2do.practice.enums.Role;
 import org.springframework.context.annotation.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,30 +13,37 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import in.math2do.practice.enums.Role;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth
+    http.csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(
+            auth ->
+                auth
 
-        // public endpoints
-        .requestMatchers("/health", "/public/**").permitAll()
+                    // public endpoints
+                    .requestMatchers("/health", "/public/**")
+                    .permitAll()
 
-        // sign up mustn't require auth
-        .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
+                    // sign up mustn't require auth
+                    .requestMatchers(HttpMethod.POST, "/users/**")
+                    .permitAll()
 
-        // Role based auth
-        .requestMatchers("/users/**").hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
+                    // Role based auth
+                    .requestMatchers("/users/**")
+                    .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
 
-        // Role based auth
-        .requestMatchers("/journals/**")
-        .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
+                    // Role based auth
+                    .requestMatchers("/journals/**")
+                    .hasAnyRole(Role.ADMIN.getRoleName(), Role.USER.getRoleName())
 
-        // rest endpoints needs authentication by default
-        .anyRequest().authenticated()).httpBasic(withDefaults());
+                    // rest endpoints needs authentication by default
+                    .anyRequest()
+                    .authenticated())
+        .httpBasic(withDefaults());
 
     return http.build();
   }

@@ -1,16 +1,16 @@
 package in.math2do.practice.service;
 
+import in.math2do.practice.constants.Constant;
+import in.math2do.practice.entity.UserEntity;
+import in.math2do.practice.enums.Role;
+import in.math2do.practice.repository.UserRepository;
 import java.util.*;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import in.math2do.practice.constants.Constant;
-import in.math2do.practice.entity.UserEntity;
-import in.math2do.practice.enums.Role;
-import in.math2do.practice.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j

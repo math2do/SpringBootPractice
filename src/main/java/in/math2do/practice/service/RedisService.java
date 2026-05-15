@@ -2,18 +2,16 @@ package in.math2do.practice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.TimeUnit;
-
 @Service
 @Slf4j
 public class RedisService {
-  @Autowired
-  private RedisTemplate<String, Object> redisTemplate;
+  @Autowired private RedisTemplate<String, Object> redisTemplate;
 
   public <T> T get(String key, Class<T> entityClass) {
     var redis = redisTemplate.opsForValue();

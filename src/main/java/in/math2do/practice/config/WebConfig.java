@@ -8,8 +8,7 @@ import org.springframework.web.servlet.config.annotation.*;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-  @Autowired
-  private ApiLoggingInterceptor interceptor;
+  @Autowired private ApiLoggingInterceptor interceptor;
 
   @Override
   public void addInterceptors(@NonNull InterceptorRegistry registry) {

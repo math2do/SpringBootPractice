@@ -2,39 +2,51 @@ package in.math2do.practice.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-import java.util.List;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import in.math2do.practice.entity.UserEntity;
 import in.math2do.practice.enums.Role;
 import in.math2do.practice.repository.UserRepository;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTests {
-  @InjectMocks
-  private UserService userService;
-  @Mock
-  private UserRepository userRepository;
-  @Mock
-  private RedisService redis;
-  @Spy
-  private PasswordEncoder encoder = new BCryptPasswordEncoder();
+  @InjectMocks private UserService userService;
+  @Mock private UserRepository userRepository;
+  @Mock private RedisService redis;
+  @Spy private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
   @Test
   void testSaveUser() {
-    UserEntity user = Mockito.spy(UserEntity.builder().username("username").password("123")
-        .roles(List.of(Role.USER.getRoleName())).build());
+    UserEntity user =
+        Mockito.spy(
+            UserEntity.builder()
+                .username("username")
+                .password("123")
+                .roles(List.of(Role.USER.getRoleName()))
+                .build());
 
     // create the user to be created in db
     String encodedPassword = encoder.encode(user.getPassword());
-    UserEntity mockDbUser = UserEntity.builder().username(user.getUsername())
-        .password(encodedPassword).roles(user.getRoles()).build();
+    UserEntity mockDbUser =
+        UserEntity.builder()
+            .username(user.getUsername())
+            .password(encodedPassword)
+            .roles(user.getRoles())
+            .build();
 
     when(userRepository.save(any(UserEntity.class))).thenReturn(mockDbUser);
     when(encoder.encode(user.getPassword())).thenReturn(encodedPassword);
